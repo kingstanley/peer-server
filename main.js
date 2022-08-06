@@ -8,7 +8,7 @@ const { Server } = require("socket.io");
 const app = express();
 const httpServer = createServer(app);
 
-httpServer.listen(9000, () => {
+httpServer.listen(process.env.PORT || 9000, () => {
   console.log("peer server running");
 });
 
@@ -36,6 +36,11 @@ app.use("/", peerServer);
 //     console.log('peer server running');
 
 // });
+
+app.get("/message", (req, res) => {
+  res.json({ message: "Peer Server is working" });
+});
+
 peerServer.on("connection", (data) => {
   console.log("peer data: ", data.id);
 });
