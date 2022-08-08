@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const { createServer } = require("http");
 const { ExpressPeerServer } = require("peer");
 const { Server } = require("socket.io");
@@ -8,16 +8,17 @@ const { Server } = require("socket.io");
 const app = express();
 const httpServer = createServer(app);
 
-httpServer.listen(process.env.PORT || 9000, () => {
+httpServer.listen(9000, () => {
   console.log("peer server running");
 });
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: ["http://localhost:4200", "https://easymeeting.vercel.app/"],
     credentials: true,
   },
 });
+
 const peerServer = ExpressPeerServer(httpServer, {
   path: "/",
 });
@@ -34,12 +35,7 @@ app.use("/", peerServer);
 
 // server.listen(9000,()=>{
 //     console.log('peer server running');
-
 // });
-
-app.get("/message", (req, res) => {
-  res.json({ message: "Peer Server is working" });
-});
 
 peerServer.on("connection", (data) => {
   console.log("peer data: ", data.id);
@@ -61,4 +57,5 @@ io.on("connection", (socket) => {
     socket.to(roomId).emit("user-connected", peerId, usertype);
   });
 });
+
 module.exports.io = io;
