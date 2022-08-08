@@ -55,6 +55,7 @@ io.on("connection", (socket) => {
     console.log(" roomId: ", roomId, " peerId: ", peerId, usertype);
     socket.join(roomId);
     socket.to(roomId).emit("user-connected", peerId, usertype);
+    console.log("socket room: ", io.sockets);
   });
 });
 
