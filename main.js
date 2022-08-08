@@ -14,7 +14,7 @@ httpServer.listen(process.env.PORT || 9000, () => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["http://localhost:4200", "https://easymeeting.vercel.app/"],
+    origin: ["http://localhost:4200", "https://easymeeting.vercel.app"],
     credentials: true,
   },
 });
@@ -37,11 +37,11 @@ app.use("/", peerServer);
 //     console.log('peer server running');
 // });
 
-peerServer.on("connection", (data) => {
-  console.log("peer data: ", data.id);
+peerServer.on("connection", (peer) => {
+  console.log("peer data: ", peer.getId());
 });
-peerServer.on("disconnection", (data) => {
-  console.log("peer disconnected: ", data);
+peerServer.on("disconnection", (peer) => {
+  console.log("peer disconnected: ", peer);
 });
 
 io.on("connection", (socket) => {
