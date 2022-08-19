@@ -50,14 +50,17 @@ io.on("connection", (socket) => {
     console.log("hello message: ", message);
     socket.emit("hello", "I have received your message");
   });
-  socket.on("ask-to-join", (roomId, username, peerId) => {
-    console.log("asking to join: ", roomId, username, peerId);
+  socket.on("ask-to-join", (roomId, username, socketId) => {
+    console.log("asking to join: ", roomId, username, socketId);
     socket.join(roomId);
-    socket.to(roomId).emit("ask-to-join", roomId, username, peerId);
+    socket.to(roomId).emit("ask-to-join", roomId, username, socketId);
+  });
+  socket.on("admit-or-reject", (socketId, result) => {
+    socket.to(socketId).emit("admitted", result);
   });
   socket.on("join-room", (roomId, peerId, usertype) => {
     console.log(" roomId: ", roomId, " peerId: ", peerId, usertype);
-    socket.join(roomId);
+    // socket.join(roomId);
     socket.to(roomId).emit("user-connected", peerId, usertype);
     console.log("socket room: ");
     socket.on("disconnect", () => {
