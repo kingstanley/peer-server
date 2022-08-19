@@ -56,6 +56,7 @@ io.on("connection", (socket) => {
     socket.to(roomId).emit("ask-to-join", roomId, username, socketId);
   });
   socket.on("admit-or-reject", (socketId, result) => {
+    console.log("admit or reject: ", result);
     socket.to(socketId).emit("admitted", result);
   });
   socket.on("join-room", (roomId, peerId, usertype) => {
