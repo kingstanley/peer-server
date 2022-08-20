@@ -6,6 +6,13 @@ const { Server } = require("socket.io");
 // import { connectDB } from './app/helpers';
 
 const app = express();
+
+var corsOptions = {
+  origin: ["http://localhost:4200", "https://easymeeting.vercel.app"],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors());
 const httpServer = createServer(app);
 
 httpServer.listen(process.env.PORT || 9000, () => {
