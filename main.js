@@ -59,9 +59,9 @@ io.on("connection", (socket) => {
     console.log("admit or reject: ", result);
     socket.to(socketId).emit("admitted", result);
   });
-  socket.on("join-room", (roomId, peerId, usertype) => {
-    console.log(" roomId: ", roomId, " peerId: ", peerId, usertype);
-    // socket.join(roomId);
+  socket.on("join-room", (roomId, peerId, username) => {
+    console.log(" roomId: ", roomId, " peerId: ", peerId, username);
+    socket.join(roomId);
     socket.to(roomId).emit("user-connected", peerId, usertype);
     console.log("socket room: ");
     socket.on("disconnect", () => {
