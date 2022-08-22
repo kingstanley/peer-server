@@ -74,17 +74,17 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected", peerId);
     });
-    socket.on("mute", (data) => {
-      console.log("mute data: ", data);
-    });
-    socket.on("admin-details", (data) => {
-      console.log("admin details: ", data);
-      socket.to(data.userSocket).emit("admin-details", {
-        peerId: data.peerId,
-        socketId: data.adminSocketId,
-        username: data.username,
-      });
-    });
+    // socket.on("mute", (data) => {
+    //   console.log("mute data: ", data);
+    // });
+    // socket.on("admin-details", (data) => {
+    //   console.log("admin details: ", data);
+    //   socket.to(data.userSocket).emit("admin-details", {
+    //     peerId: data.peerId,
+    //     socketId: data.adminSocketId,
+    //     username: data.username,
+    //   });
+    // });
   });
 });
 
