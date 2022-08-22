@@ -66,10 +66,10 @@ io.on("connection", (socket) => {
     console.log("admit or reject: ", result);
     socket.to(socketId).emit("admitted", result);
   });
-  socket.on("join-room", (roomId, peerId, username) => {
+  socket.on("join-room", (roomId, peerId, username, socketId) => {
     console.log(" roomId: ", roomId, " peerId: ", peerId, username);
     socket.join(roomId);
-    socket.to(roomId).emit("user-connected", peerId, socket.id, username);
+    socket.to(roomId).emit("user-connected", peerId, username, socketId);
     console.log("socket room: ");
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected", peerId);
