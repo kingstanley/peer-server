@@ -74,17 +74,46 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected", peerId);
     });
-    // socket.on("mute", (data) => {
-    //   console.log("mute data: ", data);
-    // });
-    // socket.on("admin-details", (data) => {
-    //   console.log("admin details: ", data);
-    //   socket.to(data.userSocket).emit("admin-details", {
-    //     peerId: data.peerId,
-    //     socketId: data.adminSocketId,
-    //     username: data.username,
-    //   });
-    // });
+    socket.on("turn-off-cam", (peerId, socketId) => {
+      console.log(
+        "asking user with ",
+        peerId,
+        " as peerId and ",
+        socketId,
+        " as socketId to turn of cam"
+      );
+      socket.to(socketId).emit("turn-off-cam", peerId, socketId);
+    });
+    socket.on("turn-on-cam", (peerId, socketId) => {
+      console.log(
+        "asking user with ",
+        peerId,
+        " as peerId and ",
+        socketId,
+        " as socketId to turn on cam"
+      );
+      socket.to(socketId).emit("turn-on-cam", peerId, socketId);
+    });
+    socket.on("turn-off-mic", (peerId, socketId) => {
+      console.log(
+        "asking user with ",
+        peerId,
+        " as peerId and ",
+        socketId,
+        " as socketId to turn of mic"
+      );
+      socket.to(socketId).emit("turn-off-mic", peerId, socketId);
+    });
+    socket.on("turn-off-cam", (peerId, socketId) => {
+      console.log(
+        "asking user with ",
+        peerId,
+        " as peerId and ",
+        socketId,
+        " as socketId to turn on mic"
+      );
+      socket.to(socketId).emit("turn-on-mic", peerId, socketId);
+    });
   });
 });
 
