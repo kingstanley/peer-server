@@ -114,6 +114,12 @@ io.on("connection", (socket) => {
       );
       socket.to(socketId).emit("turn-on-mic", peerId, socketId);
     });
+    socket.on("request-details", (peerId) => {
+      socket.to(roomId).emit("request-details", peerId);
+    });
+    socket.on("sent-details", (peerId, socketId, username) => {
+      socket.to(roomId).emit("sent-details", peerId, socketId, username);
+    });
   });
 });
 
