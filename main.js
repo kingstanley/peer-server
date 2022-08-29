@@ -104,7 +104,7 @@ io.on("connection", (socket) => {
       );
       socket.to(socketId).emit("turn-off-mic", peerId, socketId);
     });
-    socket.on("turn-off-cam", (peerId, socketId) => {
+    socket.on("turn-on-mic", (peerId, socketId) => {
       console.log(
         "asking user with ",
         peerId,
