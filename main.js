@@ -121,7 +121,7 @@ io.on("connection", (socket) => {
       socket.to(roomId).emit("sent-details", peerId, socketId, username);
     });
     socket.on("presentation", (peerId) => {
-      this.to(roomId).emit("presentation", peerId);
+      socket.to(roomId).emit("presentation", peerId);
     });
   });
 });
