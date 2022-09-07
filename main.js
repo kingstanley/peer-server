@@ -123,6 +123,9 @@ io.on("connection", (socket) => {
     socket.on("presentation", (peerId) => {
       socket.to(roomId).emit("presentation", peerId);
     });
+    socket.on("presentation-ended", (peerId) => {
+      socket.to(roomId).emit("presentation-ended", peerId);
+    });
   });
 });
 
